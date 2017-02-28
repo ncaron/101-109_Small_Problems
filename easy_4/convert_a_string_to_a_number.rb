@@ -10,6 +10,8 @@
 # You may not use any of the standard conversion methods available in Ruby, such as String#to_i, Integer(), etc.
 # Your method should do this the old-fashioned way and calculate the result by analyzing the characters in the string.
 
+# Write a hexadecimal_to_integer method that converts a string representing a hexadecimal number to its integer value.
+
 DIGITS = {
   '0'=>0,
   '1'=>1,
@@ -20,7 +22,13 @@ DIGITS = {
   '6'=>6,
   '7'=>7,
   '8'=>8,
-  '9'=>9
+  '9'=>9,
+  'A'=>10,
+  'B'=>11,
+  'C'=>12,
+  'D'=>13,
+  'E'=>14,
+  'F'=>15
 }
 
 def string_to_integer(string)
@@ -33,5 +41,17 @@ def string_to_integer(string)
   number
 end
 
+def hexadecimal_to_integer(string)
+  power = string.size - 1
+  number = 0
+
+  string.each_char do |c|
+    number += (DIGITS[c.upcase] * (16**power))
+    power -= 1
+  end
+  number
+end
+
 puts string_to_integer('4321') == 4321
 puts string_to_integer('570') == 570
+puts hexadecimal_to_integer('4D9f') == 19871
